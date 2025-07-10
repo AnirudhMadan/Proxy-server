@@ -15,6 +15,11 @@ class PromptRequest(BaseModel):
     prompt: str
     instructions: str = ""
 
+# ✅ Add this root route so Render's web service has something to show
+@app.get("/")
+def root():
+    return {"message": "✅ Gemini Proxy is running!"}
+
 @app.post("/gemini")
 async def query_gemini(request: PromptRequest):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent?key={GOOGLE_API_KEY}"
